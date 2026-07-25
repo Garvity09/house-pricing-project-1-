@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Satisfaction AI & MLOps Studio</title>
+    <meta name="description" content="Production-Grade Customer Satisfaction Prediction Engine & MLOps Pipeline Visualizer built with ZenML, MLflow & Design Patterns.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Navigation Header -->
+    <header class="navbar" id="main-header">
+        <div class="nav-brand">
+            <div class="brand-icon">🛍️</div>
+            <div class="brand-text">
+                <span class="brand-title">Satisfaction<span class="highlight">MLOps</span></span>
+                <span class="brand-tag">Production AI Pipeline</span>
+            </div>
+        </div>
+        <nav class="nav-links">
+            <a href="#predictor" class="nav-link active" id="nav-predictor-link">Predictor</a>
+            <a href="#pipeline" class="nav-link" id="nav-pipeline-link">MLOps Pipeline</a>
+            <a href="#analytics" class="nav-link" id="nav-analytics-link">Model Analytics</a>
+            <a href="#orders" class="nav-link" id="nav-orders-link">Sample Orders</a>
+        </nav>
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            <span class="status-text">Pipeline Active</span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Hero Header -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Customer Satisfaction Prediction Engine</h1>
+                <p class="hero-subtitle">Predict e-commerce order review scores (1-5 ⭐) in real time using automated data pipelines, design patterns, and ML model inference.</p>
+            </div>
+            <div class="hero-badges">
+                <span class="badge badge-purple">Factory Pattern Ingestion</span>
+                <span class="badge badge-blue">Strategy Pattern Preprocessing</span>
+                <span class="badge badge-green">MLflow Tracking</span>
+            </div>
+        </section>
+
+        <!-- Prediction Dashboard & Inputs Grid -->
+        <section class="dashboard-grid" id="predictor">
+            <!-- Left Column: Input Control Panel -->
+            <div class="glass-card input-panel">
+                <div class="card-header">
+                    <h2>📦 Order & Logistics Input Parameters</h2>
+                    <button class="btn-secondary" id="reset-inputs-btn">Reset Defaults</button>
+                </div>
+
+                <form id="prediction-form" onsubmit="return false;">
+                    <!-- Logistics Section -->
+                    <div class="form-section-title">🚚 Logistics & Delivery Speed</div>
+                    <div class="input-group">
+                        <div class="input-label-row">
+                            <label for="delivery-days">Actual Delivery Time (Days)</label>
+                            <span class="input-val" id="val-delivery-days">7 days</span>
+                        </div>
+                        <input type="range" id="delivery-days" min="1" max="35" value="7" class="slider">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-label-row">
+                            <label for="estimated-days">Estimated Delivery Time (Days)</label>
+                            <span class="input-val" id="val-estimated-days">12 days</span>
+                        </div>
+                        <input type="range" id="estimated-days" min="1" max="45" value="12" class="slider">
+                    </div>
+
+                    <div class="delay-status-card" id="delay-status-card">
+                        <span class="delay-icon">✅</span>
+                        <span class="delay-text" id="delay-text">On-time delivery (0 days delay)</span>
+                    </div>
+
+                    <!-- Pricing Section -->
+                    <div class="form-section-title">💰 Pricing & Freight</div>
+                    <div class="grid-2col">
+                        <div class="input-field">
+                            <label for="payment-value">Payment Value ($)</label>
+                            <input type="number" id="payment-value" min="10" max="2000" value="150" step="5">
+                        </div>
+                        <div class="input-field">
+                            <label for="freight-value">Freight Value ($)</label>
+                            <input type="number" id="freight-value" min="2" max="300" value="22" step="1">
+                        </div>
+                    </div>
+
+                    <div class="grid-2col">
+                        <div class="input-field">
+                            <label for="installments">Installments</label>
+                            <select id="installments">
+                                <option value="1">1x (Full Payment)</option>
+                                <option value="2">2x</option>
+                                <option value="3" selected>3x</option>
+                                <option value="6">6x</option>
+                                <option value="10">10x</option>
+                                <option value="12">12x</option>
+                            </select>
+                        </div>
+                        <div class="input-field">
+                            <label for="photos-qty">Product Photos</label>
+                            <select id="photos-qty">
+                                <option value="1">1 Photo</option>
+                                <option value="2">2 Photos</option>
+                                <option value="3" selected>3 Photos</option>
+                                <option value="5">5 Photos</option>
+                                <option value="8">8 Photos</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Physical Dimensions -->
+                    <div class="form-section-title">📐 Product Physical Metrics</div>
+                    <div class="grid-3col">
+                        <div class="input-field">
+                            <label for="weight-g">Weight (g)</label>
+                            <input type="number" id="weight-g" value="1200" min="50" max="15000">
+                        </div>
+                        <div class="input-field">
+                            <label for="length-cm">Length (cm)</label>
+                            <input type="number" id="length-cm" value="25" min="5" max="100">
+                        </div>
+                        <div class="input-field">
+                            <label for="height-cm">Height (cm)</label>
+                            <input type="number" id="height-cm" value="15" min="2" max="50">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Column: Real-time Prediction Visualizer -->
+            <div class="glass-card output-panel">
+                <div class="card-header">
+                    <h2>🎯 Real-time Prediction Output</h2>
+                    <span class="tag-model" id="active-model-tag">LightGBM Model</span>
+                </div>
+
+                <!-- Gauge Container -->
+                <div class="gauge-wrapper">
+                    <svg class="gauge-svg" viewBox="0 0 200 120">
+                        <path class="gauge-bg" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#334155" stroke-width="18" stroke-linecap="round"/>
+                        <path class="gauge-fill" id="gauge-fill" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gauge-gradient)" stroke-width="18" stroke-dasharray="251.2" stroke-dashoffset="50" stroke-linecap="round"/>
+                        <defs>
+                            <linearGradient id="gauge-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#EF4444" />
+                                <stop offset="50%" stop-color="#F59E0B" />
+                                <stop offset="100%" stop-color="#10B981" />
+                            </linearGradient>
+                        </defs>
+                        <!-- Pointer Needle -->
+                        <line id="gauge-needle" x1="100" y1="100" x2="35" y2="100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="100" cy="100" r="7" fill="#6366F1" stroke="#FFFFFF" stroke-width="2"/>
+                    </svg>
+
+                    <div class="gauge-score-display">
+                        <span class="score-num" id="score-num">4.52</span>
+                        <span class="score-label">Predicted Rating (1-5 ⭐)</span>
+                    </div>
+                </div>
+
+                <!-- Score Interpretation Badge -->
+                <div class="rating-badge-container">
+                    <div class="rating-badge badge-satisfied" id="rating-badge">
+                        <span id="badge-stars">⭐⭐⭐⭐⭐</span>
+                        <span id="badge-text">Highly Satisfied</span>
+                    </div>
+                    <p class="rating-summary" id="rating-summary">Customer is expected to leave a 5-star rating due to prompt delivery and good price-to-freight ratio.</p>
+                </div>
+
+                <!-- Metric Breakdown Grid -->
+                <div class="breakdown-grid">
+                    <div class="breakdown-card">
+                        <span class="bk-title">Freight Ratio</span>
+                        <span class="bk-val" id="bk-freight-ratio">14.7%</span>
+                        <span class="bk-sub">of total order cost</span>
+                    </div>
+                    <div class="breakdown-card">
+                        <span class="bk-title">Product Volume</span>
+                        <span class="bk-val" id="bk-volume">7.50 L</span>
+                        <span class="bk-sub">calculated size</span>
+                    </div>
+                    <div class="breakdown-card">
+                        <span class="bk-title">Logistics Risk</span>
+                        <span class="bk-val green-text" id="bk-risk">Low Risk</span>
+                        <span class="bk-sub">on-time delivery</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MLOps Architecture & Design Patterns Section -->
+        <section class="section-container" id="pipeline">
+            <h2 class="section-title">⚙️ Production MLOps Pipeline Architecture</h2>
+            <p class="section-subtitle">Decoupled end-to-end Machine Learning pipeline utilizing Object-Oriented Software Design Patterns.</p>
+
+            <div class="pipeline-flow">
+                <!-- Step 1 -->
+                <div class="flow-step">
+                    <div class="step-icon">📂</div>
+                    <div class="step-title">1. Data Ingestion</div>
+                    <div class="step-tag">Factory Pattern</div>
+                    <p class="step-desc">`DataIngestorFactory` instantiates `ZipDataIngestor` or `CSVDataIngestor` based on dataset file extension.</p>
+                </div>
+
+                <div class="flow-arrow">➔</div>
+
+                <!-- Step 2 -->
+                <div class="flow-step">
+                    <div class="step-icon">🧹</div>
+                    <div class="step-title">2. Preprocessing & Split</div>
+                    <div class="step-tag">Strategy Pattern</div>
+                    <p class="step-desc">`DataPreProcessStrategy` cleans columns & computes volume; `DataDivideStrategy` handles train/test splitting.</p>
+                </div>
+
+                <div class="flow-arrow">➔</div>
+
+                <!-- Step 3 -->
+                <div class="flow-step">
+                    <div class="step-icon">🧠</div>
+                    <div class="step-title">3. Model Strategy</div>
+                    <div class="step-tag">Strategy Pattern</div>
+                    <p class="step-desc">Abstract `Model` interface trained with `LightGBM`, `XGBoost`, `RandomForest`, or `LinearRegression`.</p>
+                </div>
+
+                <div class="flow-arrow">➔</div>
+
+                <!-- Step 4 -->
+                <div class="flow-step">
+                    <div class="step-icon">📊</div>
+                    <div class="step-title">4. MLflow Evaluation</div>
+                    <div class="step-tag">Experiment Tracking</div>
+                    <p class="step-desc">Evaluates MSE, RMSE, and $R^2$ Score. Logs parameters, metrics, and model artifacts into MLflow server.</p>
+                </div>
+
+                <div class="flow-arrow">➔</div>
+
+                <!-- Step 5 -->
+                <div class="flow-step highlight-step">
+                    <div class="step-icon">🚀</div>
+                    <div class="step-title">5. Model Serving</div>
+                    <div class="step-tag">Continuous Deployment</div>
+                    <p class="step-desc">`continuous_deployment_pipeline` validates accuracy threshold and serves active model to Streamlit & Web API.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Performance Analytics Section -->
+        <section class="section-container" id="analytics">
+            <h2 class="section-title">📈 Model Analytics & Feature Importance</h2>
+            <div class="analytics-grid">
+                <!-- Model Comparison Table -->
+                <div class="glass-card">
+                    <h3>Model Strategy Comparison</h3>
+                    <div class="table-responsive">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Model Strategy</th>
+                                    <th>MSE</th>
+                                    <th>RMSE</th>
+                                    <th>R² Score</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="active-row">
+                                    <td><strong>LightGBM Regressor</strong></td>
+                                    <td>0.4079</td>
+                                    <td>0.6386</td>
+                                    <td>0.2710</td>
+                                    <td><span class="pill pill-green">Deployed</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Random Forest</strong></td>
+                                    <td>0.4120</td>
+                                    <td>0.6418</td>
+                                    <td>0.2635</td>
+                                    <td><span class="pill pill-gray">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>XGBoost Regressor</strong></td>
+                                    <td>0.4185</td>
+                                    <td>0.6469</td>
+                                    <td>0.2510</td>
+                                    <td><span class="pill pill-gray">Available</span></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Linear Regression</strong></td>
+                                    <td>0.4950</td>
+                                    <td>0.7035</td>
+                                    <td>0.1140</td>
+                                    <td><span class="pill pill-gray">Baseline</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Feature Importance Chart -->
+                <div class="glass-card">
+                    <h3>Top Feature Importance Drivers</h3>
+                    <div class="chart-container" id="fi-chart">
+                        <!-- Bars dynamically rendered by JS -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sample E-Commerce Orders Table -->
+        <section class="section-container" id="orders">
+            <h2 class="section-title">📋 Sample E-Commerce Orders Dataset</h2>
+            <p class="section-subtitle">Click any order row to load its feature attributes directly into the real-time prediction engine above.</p>
+
+            <div class="glass-card">
+                <div class="table-controls">
+                    <input type="text" id="order-search" placeholder="Search Order ID, Customer..." class="search-input">
+                    <button class="btn-primary" id="btn-add-sample">+ Generate Random Order</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="data-table" id="sample-orders-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Payment ($)</th>
+                                <th>Freight ($)</th>
+                                <th>Delivery Days</th>
+                                <th>Delay Days</th>
+                                <th>Actual Rating</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-tbody">
+                            <!-- Populated dynamically via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Customer Satisfaction MLOps Pipeline & Web Application • Powered by ZenML, MLflow & Scikit-Learn</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>

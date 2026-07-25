@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# Datasets & Zip files
+data/
+models/
+deployed_model/
+
+# MLflow & ZenML
+mlruns/
+.zen/
+
+# OS specific
+.DS_Store
+Thumbs.db
